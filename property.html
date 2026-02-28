@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Property Detail | Mumbai Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    .detail-hero { height: 420px; object-fit: cover; width: 100%; border-radius: 16px; }
+    .detail-price { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:700; color:#0b1120; }
+    .detail-badge { display:inline-block; padding:6px 16px; border-radius:20px; font-size:0.82rem; font-weight:700; margin-bottom:16px; }
+    .detail-meta { display:flex; gap:24px; flex-wrap:wrap; padding:20px 0; border-top:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb; margin:20px 0; }
+    .detail-meta-item { text-align:center; }
+    .detail-meta-item .val { font-weight:700; color:#0b1120; font-size:1.1rem; }
+    .detail-meta-item .lbl { font-size:0.78rem; color:#64748b; }
+    .contact-sticky { position:sticky; top:90px; }
+    .contact-card { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:28px; box-shadow:0 4px 24px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <div class="loader-logo">Mumbai<span>Realty</span></div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<a id="waBtn" href="#" class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<nav class="site-nav scrolled" id="siteNav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a href="index.html" class="nav-brand">Mumbai<span>Realty</span></a>
+    <div class="nav-links d-none d-lg-flex align-items-center gap-4">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="properties.html" class="nav-link active">Properties</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+      <a href="login.html" class="nav-cta"><i class="fas fa-lock me-1"></i>Agent Login</a>
+    </div>
+    <button class="hamburger d-lg-none" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu d-lg-none" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="properties.html">Properties</a>
+    <a href="index.html#about">About</a>
+    <a href="login.html">Agent Login</a>
+  </div>
+</nav>
+
+<div style="padding-top:90px">
+  <div class="container py-4">
+    <a href="properties.html" style="color:#64748b;text-decoration:none;font-size:0.9rem">
+      <i class="fas fa-arrow-left me-2"></i>Back to Properties
+    </a>
+  </div>
+
+  <div class="container pb-5" id="detailContent">
+    <div class="text-center py-5"><div class="loading-spin"></div></div>
+  </div>
+</div>
+
+<footer class="site-footer" style="margin-top:0">
+  <div class="container">
+    <div class="footer-bottom" style="margin-top:0;border-top:1px solid rgba(255,255,255,0.06)">
+      <p>© 2024 Mumbai Realty | <a href="index.html" style="color:#c9a84c">Home</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  initWA();
+  setTimeout(hideLoader, 700);
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('active');
+  });
+
+  const id = new URLSearchParams(window.location.search).get('id');
+  const content = document.getElementById('detailContent');
+  if (!id) { content.innerHTML = '<p style="text-align:center;color:#888;padding:48px">Property not found.</p>'; return; }
+
+  try {
+    const doc = await db.collection('properties').doc(id).get();
+    if (!doc.exists) { content.innerHTML = '<p style="text-align:center;color:#888;padding:48px">Property not found.</p>'; return; }
+    const p = doc.data();
+    const sold = p.status === 'Sold';
+    const img = p.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80';
+    const waLink = `https://wa.me/${WA_NUMBER}?text=Hello%2C%20I%20am%20interested%20in%20%22${encodeURIComponent(p.title)}%22`;
+    document.title = `${p.title} | Mumbai Realty`;
+
+    content.innerHTML = `
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <img src="${img}" alt="${p.title}" class="detail-hero" onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80'"/>
+        <div class="mt-4">
+          <span class="detail-badge ${sold ? 'status-sold' : 'status-sale'}">${sold ? 'Sold' : 'For Sale'}</span>
+          <span class="detail-badge" style="background:#eff6ff;color:#3b82f6;margin-left:8px">${p.type || 'Flat'}</span>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#0b1120;margin-bottom:8px">${p.title}</h1>
+          <p style="color:#64748b"><i class="fas fa-map-marker-alt me-2" style="color:#c9a84c"></i>${p.location}</p>
+          <div class="detail-price">${formatPrice(p.price)}</div>
+          <div class="detail-meta">
+            ${p.bedrooms ? `<div class="detail-meta-item"><div class="val">${p.bedrooms}</div><div class="lbl">Bedrooms</div></div>` : ''}
+            ${p.bathrooms ? `<div class="detail-meta-item"><div class="val">${p.bathrooms}</div><div class="lbl">Bathrooms</div></div>` : ''}
+            ${p.area ? `<div class="detail-meta-item"><div class="val">${p.area}</div><div class="lbl">Sq. Ft.</div></div>` : ''}
+          </div>
+          ${p.description ? `<h5 style="font-weight:700;margin-bottom:12px">About This Property</h5><p style="color:#64748b;line-height:1.8">${p.description}</p>` : ''}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="contact-sticky">
+          <div class="contact-card">
+            <h5 style="font-weight:700;margin-bottom:4px">Interested?</h5>
+            <p style="color:#64748b;font-size:0.88rem;margin-bottom:20px">Contact agent for details</p>
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin-bottom:12px"/>
+            <div style="font-weight:700;color:#0b1120">Swapnil Gorule</div>
+            <div style="font-size:0.82rem;color:#64748b;margin-bottom:20px">Senior Real Estate Consultant</div>
+            <a href="${waLink}" class="btn-primary-custom w-100 justify-content-center mb-3" target="_blank" style="display:flex">
+              <i class="fab fa-whatsapp me-2"></i>WhatsApp Now
+            </a>
+            <a href="mailto:swapnilgorule93@gmail.com?subject=Inquiry: ${encodeURIComponent(p.title)}" class="btn-outline-custom w-100 justify-content-center" style="display:flex">
+              <i class="fas fa-envelope me-2"></i>Send Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  } catch(e) {
+    content.innerHTML = '<p style="text-align:center;color:#888;padding:48px">Error loading property.</p>';
+  }
+});
+</script>
+</body>
+</html>

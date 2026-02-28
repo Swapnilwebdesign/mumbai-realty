@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Mumbai Realty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar-brand">Mumbai<span>Realty</span></a>
+    <nav class="sidebar-nav">
+      <a class="sidebar-item active" id="navDash" onclick="showSection('dashboard')">
+        <i class="fas fa-th-large"></i> Dashboard
+      </a>
+      <a class="sidebar-item" id="navAdd" onclick="showSection('add')">
+        <i class="fas fa-plus-circle"></i> Add Property
+      </a>
+      <a class="sidebar-item" id="navProps" onclick="showSection('manage')">
+        <i class="fas fa-list"></i> Manage Properties
+      </a>
+      <a class="sidebar-item" id="navView" href="properties.html" target="_blank">
+        <i class="fas fa-external-link-alt"></i> View Website
+      </a>
+      <div style="flex:1;margin-top:auto"></div>
+      <button class="sidebar-item logout-btn" onclick="logout()" style="margin-top:32px">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <div class="top-bar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="hamburger d-lg-none" id="sidebarToggle" style="margin-right:8px"><span></span><span></span><span></span></button>
+        <span class="top-bar-title" id="pageTitle">Dashboard</span>
+      </div>
+      <div style="font-size:0.82rem;color:#64748b"><i class="fas fa-user-circle me-1"></i>Swapnil Gorule</div>
+    </div>
+
+    <!-- ── DASHBOARD SECTION ── -->
+    <div class="dash-section" id="secDashboard">
+      <div class="row g-4 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#eff6ff"><i class="fas fa-home" style="color:#3b82f6"></i></div>
+            <div class="kpi-num" id="kpiTotal">—</div>
+            <div class="kpi-label">Total Properties</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#f0fdf4"><i class="fas fa-tag" style="color:#22c55e"></i></div>
+            <div class="kpi-num" id="kpiSale">—</div>
+            <div class="kpi-label">For Sale</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#fef2f2"><i class="fas fa-check-circle" style="color:#ef4444"></i></div>
+            <div class="kpi-num" id="kpiSold">—</div>
+            <div class="kpi-label">Sold</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi-card">
+            <div class="kpi-icon" style="background:#fefce8"><i class="fas fa-rupee-sign" style="color:#c9a84c"></i></div>
+            <div class="kpi-num" id="kpiValue">—</div>
+            <div class="kpi-label">Portfolio Value</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">Recent Properties</span>
+          <a onclick="showSection('manage')" style="font-size:0.82rem;color:#3b82f6;cursor:pointer">View All</a>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="dash-table" id="recentTable">
+            <thead>
+              <tr>
+                <th>Title</th><th>Location</th><th>Type</th><th>Price</th><th>Status</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recentBody">
+              <tr><td colspan="6" style="text-align:center;padding:24px"><div class="loading-spin" style="width:28px;height:28px;margin:auto"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ADD PROPERTY SECTION ── -->
+    <div class="dash-section" id="secAdd" style="display:none">
+      <div class="form-section">
+        <h5 style="font-weight:700;color:#0b1120;margin-bottom:24px" id="formTitle">
+          <i class="fas fa-plus-circle me-2" style="color:#c9a84c"></i>Add New Property
+        </h5>
+        <input type="hidden" id="editId"/>
+        <div class="row g-4">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label>Property Title *</label>
+              <input type="text" id="fTitle" placeholder="e.g. 2BHK Flat in Andheri West" required/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Price (₹) *</label>
+              <input type="number" id="fPrice" placeholder="e.g. 7500000"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Location *</label>
+              <select id="fLocation">
+                <option value="">Select Location</option>
+                <option>Andheri</option><option>Borivali</option><option>Virar</option>
+                <option>Bandra</option><option>Mira Road</option><option>Kandivali</option>
+                <option>Dahisar</option><option>Malad</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Property Type *</label>
+              <select id="fType">
+                <option value="">Select Type</option>
+                <option>Flat</option><option>Shop</option><option>Office</option><option>Plot</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Status</label>
+              <select id="fStatus">
+                <option value="For Sale">For Sale</option>
+                <option value="Sold">Sold</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bedrooms</label>
+              <input type="number" id="fBedrooms" placeholder="e.g. 2"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bathrooms</label>
+              <input type="number" id="fBathrooms" placeholder="e.g. 2"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Area (sqft)</label>
+              <input type="number" id="fArea" placeholder="e.g. 850"/>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label>Image URL</label>
+              <input type="url" id="fImage" placeholder="https://images.unsplash.com/..."/>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="fDesc" placeholder="Describe the property..."></textarea>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex gap-3 flex-wrap">
+              <button class="btn-save" onclick="saveProperty()">
+                <i class="fas fa-save me-2"></i><span id="saveBtnText">Save Property</span>
+              </button>
+              <button class="btn-edit" onclick="resetForm()">
+                <i class="fas fa-times me-1"></i>Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MANAGE PROPERTIES SECTION ── -->
+    <div class="dash-section" id="secManage" style="display:none">
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">All Properties</span>
+          <button class="btn-save" style="padding:8px 18px;font-size:0.85rem" onclick="showSection('add')">
+            <i class="fas fa-plus me-1"></i>Add New
+          </button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="dash-table">
+            <thead>
+              <tr><th>Title</th><th>Location</th><th>Type</th><th>Price</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="manageBody">
+              <tr><td colspan="6" style="text-align:center;padding:24px"><div class="loading-spin" style="width:28px;height:28px;margin:auto"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:none;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:14px;padding:32px;max-width:380px;width:90%;text-align:center">
+    <i class="fas fa-trash-alt" style="font-size:2rem;color:#ef4444;margin-bottom:16px"></i>
+    <h5 style="font-weight:700;margin-bottom:8px">Delete Property?</h5>
+    <p style="color:#64748b;font-size:0.9rem;margin-bottom:24px">This action cannot be undone.</p>
+    <div class="d-flex gap-3 justify-content-center">
+      <button class="btn-danger" id="confirmDelete">Yes, Delete</button>
+      <button class="btn-edit" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script>
+// Auth guard
+requireAuth();
+
+let deleteTargetId = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sidebarToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarToggle').classList.toggle('active');
+  });
+  loadDashboard();
+});
+
+function showSection(sec) {
+  ['secDashboard','secAdd','secManage'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  ['navDash','navAdd','navProps'].forEach(id => {
+    document.getElementById(id).classList.remove('active');
+  });
+
+  if (sec === 'dashboard') {
+    document.getElementById('secDashboard').style.display = 'block';
+    document.getElementById('navDash').classList.add('active');
+    document.getElementById('pageTitle').textContent = 'Dashboard';
+    loadDashboard();
+  } else if (sec === 'add') {
+    document.getElementById('secAdd').style.display = 'block';
+    document.getElementById('navAdd').classList.add('active');
+    document.getElementById('pageTitle').textContent = 'Add Property';
+  } else if (sec === 'manage') {
+    document.getElementById('secManage').style.display = 'block';
+    document.getElementById('navProps').classList.add('active');
+    document.getElementById('pageTitle').textContent = 'Manage Properties';
+    loadManage();
+  }
+
+  // Close mobile sidebar
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+async function loadDashboard() {
+  try {
+    const snap = await db.collection('properties').get();
+    let total = 0, sale = 0, sold = 0, value = 0;
+    let rows = '';
+    const docs = [];
+    snap.forEach(doc => docs.push({ id: doc.id, ...doc.data() }));
+    docs.forEach(p => {
+      total++;
+      if (p.status === 'Sold') sold++; else sale++;
+      value += Number(p.price) || 0;
+    });
+    document.getElementById('kpiTotal').textContent = total;
+    document.getElementById('kpiSale').textContent = sale;
+    document.getElementById('kpiSold').textContent = sold;
+    document.getElementById('kpiValue').textContent = formatPrice(value);
+
+    const recent = docs.slice(0, 8);
+    rows = recent.map(p => `
+      <tr>
+        <td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title || '—'}</td>
+        <td>${p.location || '—'}</td>
+        <td>${p.type || '—'}</td>
+        <td style="font-weight:600;color:#0b1120">${formatPrice(p.price)}</td>
+        <td><span class="status-badge ${p.status === 'Sold' ? 'status-sold' : 'status-sale'}">${p.status || 'For Sale'}</span></td>
+        <td>
+          <button class="btn-edit" onclick="editProperty('${p.id}')">Edit</button>
+          <button class="btn-danger" onclick="confirmDelete('${p.id}')">Delete</button>
+        </td>
+      </tr>`).join('');
+    document.getElementById('recentBody').innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:#94a3b8;padding:24px">No properties yet.</td></tr>';
+  } catch(e) {
+    document.getElementById('recentBody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:24px">Error loading data.</td></tr>';
+  }
+}
+
+async function loadManage() {
+  const body = document.getElementById('manageBody');
+  try {
+    const snap = await db.collection('properties').orderBy('createdAt','desc').get();
+    let rows = '';
+    snap.forEach(doc => {
+      const p = doc.data();
+      rows += `<tr>
+        <td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.title || '—'}</td>
+        <td>${p.location || '—'}</td>
+        <td>${p.type || '—'}</td>
+        <td style="font-weight:600">${formatPrice(p.price)}</td>
+        <td><span class="status-badge ${p.status === 'Sold' ? 'status-sold' : 'status-sale'}">${p.status || 'For Sale'}</span></td>
+        <td>
+          <button class="btn-edit" onclick="editProperty('${doc.id}')">Edit</button>
+          <button class="btn-danger" onclick="confirmDelete('${doc.id}')">Delete</button>
+        </td>
+      </tr>`;
+    });
+    body.innerHTML = rows || '<tr><td colspan="6" style="text-align:center;color:#94a3b8;padding:24px">No properties yet.</td></tr>';
+  } catch(e) {
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:24px">Error loading.</td></tr>';
+  }
+}
+
+async function saveProperty() {
+  const id     = document.getElementById('editId').value;
+  const title  = document.getElementById('fTitle').value.trim();
+  const price  = parseFloat(document.getElementById('fPrice').value) || 0;
+  const loc    = document.getElementById('fLocation').value;
+  const type   = document.getElementById('fType').value;
+  const status = document.getElementById('fStatus').value;
+
+  if (!title || !loc || !type) { showToast('Please fill required fields (Title, Location, Type)', 'error'); return; }
+
+  const data = {
+    title, price,
+    location: loc,
+    type, status,
+    bedrooms:  parseInt(document.getElementById('fBedrooms').value) || null,
+    bathrooms: parseInt(document.getElementById('fBathrooms').value) || null,
+    area:      parseInt(document.getElementById('fArea').value) || null,
+    image:     document.getElementById('fImage').value.trim() || null,
+    description: document.getElementById('fDesc').value.trim() || null,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  const btn = document.querySelector('.btn-save');
+  btn.disabled = true;
+
+  try {
+    if (id) {
+      await db.collection('properties').doc(id).update(data);
+      showToast('Property updated successfully!');
+    } else {
+      data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+      await db.collection('properties').add(data);
+      showToast('Property added successfully!');
+    }
+    resetForm();
+    showSection('manage');
+  } catch(e) {
+    showToast('Error saving property: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function editProperty(id) {
+  try {
+    const doc = await db.collection('properties').doc(id).get();
+    if (!doc.exists) { showToast('Property not found', 'error'); return; }
+    const p = doc.data();
+    document.getElementById('editId').value = id;
+    document.getElementById('fTitle').value = p.title || '';
+    document.getElementById('fPrice').value = p.price || '';
+    document.getElementById('fLocation').value = p.location || '';
+    document.getElementById('fType').value = p.type || '';
+    document.getElementById('fStatus').value = p.status || 'For Sale';
+    document.getElementById('fBedrooms').value = p.bedrooms || '';
+    document.getElementById('fBathrooms').value = p.bathrooms || '';
+    document.getElementById('fArea').value = p.area || '';
+    document.getElementById('fImage').value = p.image || '';
+    document.getElementById('fDesc').value = p.description || '';
+    document.getElementById('formTitle').innerHTML = '<i class="fas fa-edit me-2" style="color:#c9a84c"></i>Edit Property';
+    document.getElementById('saveBtnText').textContent = 'Update Property';
+    showSection('add');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch(e) {
+    showToast('Error loading property', 'error');
+  }
+}
+
+function resetForm() {
+  document.getElementById('editId').value = '';
+  ['fTitle','fPrice','fBedrooms','fBathrooms','fArea','fImage','fDesc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fLocation').value = '';
+  document.getElementById('fType').value = '';
+  document.getElementById('fStatus').value = 'For Sale';
+  document.getElementById('formTitle').innerHTML = '<i class="fas fa-plus-circle me-2" style="color:#c9a84c"></i>Add New Property';
+  document.getElementById('saveBtnText').textContent = 'Save Property';
+}
+
+function confirmDelete(id) {
+  deleteTargetId = id;
+  const modal = document.getElementById('deleteModal');
+  modal.style.display = 'flex';
+  document.getElementById('confirmDelete').onclick = async () => {
+    try {
+      await db.collection('properties').doc(deleteTargetId).delete();
+      showToast('Property deleted.');
+      closeModal();
+      loadDashboard();
+      loadManage();
+    } catch(e) {
+      showToast('Error deleting property.', 'error');
+    }
+  };
+}
+
+function closeModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  deleteTargetId = null;
+}
+</script>
+</body>
+</html>
