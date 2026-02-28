@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Properties | Mumbai Realty</title>
+  <meta name="description" content="Browse all available properties in Mumbai — flats, shops, offices and plots in Andheri, Borivali, Virar, Bandra, Mira Road and more." />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 60px 0 40px;
+      color: #fff;
+    }
+    .page-hero h1 { font-size: 2.2rem; font-weight: 700; }
+    .breadcrumb-item a { color: var(--gold); }
+    .breadcrumb-item.active { color: rgba(255,255,255,0.7); }
+    .breadcrumb-item + .breadcrumb-item::before { color: rgba(255,255,255,0.4); }
+    #propCount { font-size: 0.9rem; color: var(--gray); }
+    .sort-bar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+    @keyframes fadeInRight { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+  </style>
+</head>
+<body>
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">Mumbai <span>Realty</span></div>
+  <div class="loader-ring"></div>
+</div>
+
+<a id="waBtn" href="#" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<div class="wa-tooltip">Chat with Agent</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html"><i class="fas fa-building me-2"></i>Mumbai <span>Realty</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="properties.html">Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-sm btn-gold px-3 py-2" href="login.html"><i class="fas fa-lock me-1"></i> Agent Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-2">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+        <li class="breadcrumb-item active">Properties</li>
+      </ol>
+    </nav>
+    <h1><i class="fas fa-search me-2" style="color:var(--gold);"></i>Browse Properties</h1>
+    <p style="color:rgba(255,255,255,0.72);">Find your perfect property across Mumbai's finest localities</p>
+  </div>
+</div>
+
+<section class="section-pad" style="padding-top:40px;">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- FILTERS SIDEBAR -->
+      <div class="col-lg-3">
+        <div class="filter-wrap">
+          <h6 class="fw-bold mb-3"><i class="fas fa-filter me-2" style="color:var(--sky);"></i>Filter Properties</h6>
+
+          <div class="mb-3">
+            <label class="form-label fw-500">Location</label>
+            <select class="form-select" id="filterLoc">
+              <option value="">All Locations</option>
+              <option>Andheri</option><option>Borivali</option><option>Virar</option>
+              <option>Bandra</option><option>Mira Road</option><option>Kandivali</option>
+              <option>Dahisar</option><option>Malad</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-500">Property Type</label>
+            <select class="form-select" id="filterType">
+              <option value="">All Types</option>
+              <option>Flat</option><option>Shop</option><option>Office</option><option>Plot</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-500">Min Price</label>
+            <select class="form-select" id="filterMinPrice">
+              <option value="0">No Minimum</option>
+              <option value="1000000">₹10 L</option>
+              <option value="5000000">₹50 L</option>
+              <option value="10000000">₹1 Cr</option>
+              <option value="25000000">₹2.5 Cr</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-500">Max Price</label>
+            <select class="form-select" id="filterMaxPrice">
+              <option value="999999999">No Maximum</option>
+              <option value="5000000">₹50 L</option>
+              <option value="10000000">₹1 Cr</option>
+              <option value="25000000">₹2.5 Cr</option>
+              <option value="50000000">₹5 Cr</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-500">Status</label>
+            <select class="form-select" id="filterStatus">
+              <option value="">All</option>
+              <option value="For Sale">For Sale</option>
+              <option value="Sold">Sold</option>
+            </select>
+          </div>
+
+          <button class="btn btn-navy w-100 py-2" onclick="applyFilters()">
+            <i class="fas fa-search me-2"></i>Apply Filters
+          </button>
+          <button class="btn btn-outline-secondary w-100 py-2 mt-2" onclick="resetFilters()">
+            <i class="fas fa-times me-2"></i>Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- PROPERTIES GRID -->
+      <div class="col-lg-9">
+        <div class="sort-bar">
+          <span id="propCount">Loading…</span>
+          <div class="d-flex align-items-center gap-2">
+            <label class="form-label mb-0 text-muted">Sort:</label>
+            <select class="form-select form-select-sm" style="width:160px;" id="sortBy" onchange="applyFilters()">
+              <option value="createdAt-desc">Newest First</option>
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-4" id="propGrid">
+          <div class="col-12 text-center py-5">
+            <div class="loader-ring mx-auto"></div>
+            <p class="text-muted mt-3">Loading properties…</p>
+          </div>
+        </div>
+
+        <!-- Pagination placeholder -->
+        <div class="text-center mt-5" id="loadMoreWrap" style="display:none!important;">
+          <button class="btn btn-navy px-5 py-2" id="loadMoreBtn" onclick="loadMore()">
+            <i class="fas fa-plus me-2"></i>Load More Properties
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="footer-brand"><i class="fas fa-building me-2"></i>Mumbai <span>Realty</span></div>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.6);margin-top:8px;">© 2024 Mumbai Realty. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <a href="mailto:swapnilgorule93@gmail.com" class="footer a">swapnilgorule93@gmail.com</a><br>
+        <span style="font-size:0.85rem;color:rgba(255,255,255,0.6);">Mumbai, Maharashtra, India</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/firebase-config.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  let allProperties = [];
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initWhatsApp();
+    setTimeout(hideLoader, 600);
+    loadAllProperties();
+    // Apply URL params
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('loc'))    document.getElementById('filterLoc').value  = p.get('loc');
+    if (p.get('type'))   document.getElementById('filterType').value = p.get('type');
+    if (p.get('budget')) document.getElementById('filterMaxPrice').value = p.get('budget');
+  });
+
+  async function loadAllProperties() {
+    try {
+      const snap = await db.collection('properties').orderBy('createdAt','desc').get();
+      allProperties = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      applyFilters();
+    } catch(err) {
+      console.error(err);
+      document.getElementById('propGrid').innerHTML = `
+        <div class="col-12 empty-state">
+          <i class="fas fa-exclamation-circle"></i>
+          <h5>Could not load properties</h5>
+          <p>Please check your Firebase configuration in js/firebase-config.js</p>
+        </div>`;
+      document.getElementById('propCount').textContent = '';
+    }
+  }
+
+  function applyFilters() {
+    const loc    = document.getElementById('filterLoc').value;
+    const type   = document.getElementById('filterType').value;
+    const minP   = Number(document.getElementById('filterMinPrice').value) || 0;
+    const maxP   = Number(document.getElementById('filterMaxPrice').value) || 999999999;
+    const status = document.getElementById('filterStatus').value;
+    const sort   = document.getElementById('sortBy').value;
+
+    let filtered = allProperties.filter(p => {
+      if (loc    && p.location !== loc)   return false;
+      if (type   && p.type !== type)       return false;
+      if (status && p.status !== status)   return false;
+      const price = Number(p.price) || 0;
+      if (price < minP || price > maxP)    return false;
+      return true;
+    });
+
+    // Sort
+    const [field, dir] = sort.split('-');
+    filtered.sort((a, b) => {
+      let va = field === 'price' ? Number(a.price) : (a.createdAt?.seconds || 0);
+      let vb = field === 'price' ? Number(b.price) : (b.createdAt?.seconds || 0);
+      return dir === 'asc' ? va - vb : vb - va;
+    });
+
+    renderGrid(filtered);
+  }
+
+  function renderGrid(props) {
+    const grid = document.getElementById('propGrid');
+    document.getElementById('propCount').textContent = `${props.length} propert${props.length === 1 ? 'y' : 'ies'} found`;
+
+    if (props.length === 0) {
+      grid.innerHTML = `<div class="col-12 empty-state"><i class="fas fa-search"></i><h5>No properties found</h5><p>Try adjusting your filters.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = props.map(p => {
+      const img = p.image || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=70';
+      const sold = p.status === 'Sold';
+      return `
+      <div class="col-lg-4 col-md-6">
+        <div class="prop-card">
+          <div class="prop-card-img-wrap">
+            <img src="${img}" alt="${p.title}" class="prop-card-img" loading="lazy"
+                 onerror="this.src='https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=70'">
+            <span class="prop-badge ${sold?'sold':''}">${sold?'Sold':'For Sale'}</span>
+            <span class="prop-type-badge">${p.type||'Flat'}</span>
+          </div>
+          <div class="prop-card-body">
+            <div class="prop-price">${formatPrice(p.price)}</div>
+            <div class="prop-title">${p.title}</div>
+            <div class="prop-location"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
+            <div class="prop-meta">
+              ${p.bedrooms  ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Bed</span>` : ''}
+              ${p.bathrooms ? `<span><i class="fas fa-bath"></i> ${p.bathrooms} Bath</span>` : ''}
+              ${p.area      ? `<span><i class="fas fa-expand-arrows-alt"></i> ${p.area} sqft</span>` : ''}
+            </div>
+            <a href="property-detail.html?id=${p.id}" class="btn-view w-100 text-center">View Details <i class="fas fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function resetFilters() {
+    ['filterLoc','filterType','filterMinPrice','filterStatus','sortBy'].forEach(id => {
+      const el = document.getElementById(id);
+      el.value = el.options[0].value;
+    });
+    document.getElementById('filterMaxPrice').value = '999999999';
+    applyFilters();
+  }
+</script>
+</body>
+</html>
