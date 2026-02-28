@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mumbai Realty | Find Your Dream Property in Mumbai</title>
+  <meta name="description" content="Find premium properties in Mumbai — Flats, Shops, Offices & Plots in Andheri, Borivali, Virar, Bandra, Mira Road and more. Expert real estate agent in Mumbai." />
+  <meta name="keywords" content="Mumbai real estate, property Mumbai, flats Mumbai, buy property Mumbai, Andheri, Borivali, Virar, Bandra" />
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    @keyframes fadeInRight { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+    .hero-anim { animation: heroFade 1s ease forwards; }
+    @keyframes heroFade { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .area-card {
+      background: var(--off); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      text-align: center; transition: all 0.3s; cursor: pointer;
+    }
+    .area-card:hover { background: var(--navy); color: #fff; transform: translateY(-4px); }
+    .area-card:hover i, .area-card:hover h6 { color: var(--gold) !important; }
+    .area-card i { font-size: 1.8rem; color: var(--sky); margin-bottom: 10px; }
+    .area-card h6 { font-weight: 600; margin-bottom: 4px; color: var(--navy); }
+    .area-card p { font-size: 0.82rem; color: var(--gray); margin: 0; }
+    .why-card { text-align: center; padding: 32px 20px; }
+    .why-icon {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px; color: #fff; font-size: 1.6rem;
+    }
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      padding: 80px 0; text-align: center; color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-logo">Mumbai <span>Realty</span></div>
+  <div class="loader-ring"></div>
+</div>
+
+<!-- WhatsApp -->
+<a id="waBtn" href="#" class="wa-btn" target="_blank" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<div class="wa-tooltip">Chat with Agent</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fas fa-building me-2"></i>Mumbai <span>Realty</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="pages/properties.html"><i class="fas fa-search me-1"></i> Properties</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user me-1"></i> About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-sm btn-gold px-3 py-2" href="pages/login.html"><i class="fas fa-lock me-1"></i> Agent Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content hero-anim">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="section-label"><i class="fas fa-map-marker-alt me-1"></i> Mumbai, Maharashtra</div>
+        <h1>Find Your <span>Dream Property</span><br>in Mumbai</h1>
+        <p>Trusted real estate expertise across Andheri, Borivali, Virar, Bandra, Mira Road &amp; beyond. Let's find your perfect home.</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="pages/properties.html" class="btn btn-search px-4 py-2" style="width:auto;">
+            <i class="fas fa-search me-2"></i>Browse Properties
+          </a>
+          <a href="mailto:swapnilgorule93@gmail.com" class="btn btn-outline-light px-4 py-2" style="border-radius:8px;font-weight:600;">
+            <i class="fas fa-envelope me-2"></i>Contact Agent
+          </a>
+        </div>
+
+        <!-- Search Card -->
+        <div class="search-card mt-4">
+          <form id="searchForm">
+            <div class="row g-3 align-items-end">
+              <div class="col-md-3">
+                <label class="form-label text-muted small mb-1">Location</label>
+                <select class="form-select" id="searchLoc">
+                  <option value="">All Locations</option>
+                  <option>Andheri</option>
+                  <option>Borivali</option>
+                  <option>Virar</option>
+                  <option>Bandra</option>
+                  <option>Mira Road</option>
+                  <option>Kandivali</option>
+                  <option>Dahisar</option>
+                  <option>Malad</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label text-muted small mb-1">Budget</label>
+                <select class="form-select" id="searchBudget">
+                  <option value="">Any Budget</option>
+                  <option value="5000000">Under ₹50 L</option>
+                  <option value="10000000">Under ₹1 Cr</option>
+                  <option value="25000000">Under ₹2.5 Cr</option>
+                  <option value="50000000">Under ₹5 Cr</option>
+                  <option value="999999999">₹5 Cr+</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label text-muted small mb-1">Property Type</label>
+                <select class="form-select" id="searchType">
+                  <option value="">All Types</option>
+                  <option>Flat</option>
+                  <option>Shop</option>
+                  <option>Office</option>
+                  <option>Plot</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <button type="submit" class="btn-search">
+                  <i class="fas fa-search me-2"></i>Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-6 col-md-3 stat-item">
+        <div class="num">500+</div>
+        <div class="lbl">Properties Listed</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="num">10+</div>
+        <div class="lbl">Years Experience</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="num">6</div>
+        <div class="lbl">Mumbai Areas Covered</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="num">300+</div>
+        <div class="lbl">Happy Clients</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED PROPERTIES -->
+<section class="section-pad">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Our Portfolio</div>
+      <h2 class="section-title">Featured Properties</h2>
+      <div class="title-underline mx-auto"></div>
+    </div>
+    <div class="row g-4" id="featuredGrid">
+      <!-- JS inject -->
+      <div class="col-12 text-center py-5">
+        <div class="loader-ring mx-auto"></div>
+        <p class="text-muted mt-3">Loading properties…</p>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="pages/properties.html" class="btn btn-navy px-5 py-3">
+        View All Properties <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section class="section-pad bg-white" style="padding-top:0">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-label">We Serve</div>
+      <h2 class="section-title">Mumbai Service Areas</h2>
+      <div class="title-underline mx-auto"></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Andheri'">
+        <div class="area-card"><i class="fas fa-city"></i><h6>Andheri</h6><p>50+ Properties</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Borivali'">
+        <div class="area-card"><i class="fas fa-building"></i><h6>Borivali</h6><p>40+ Properties</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Virar'">
+        <div class="area-card"><i class="fas fa-home"></i><h6>Virar</h6><p>60+ Properties</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Bandra'">
+        <div class="area-card"><i class="fas fa-star"></i><h6>Bandra</h6><p>30+ Properties</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Mira+Road'">
+        <div class="area-card"><i class="fas fa-road"></i><h6>Mira Road</h6><p>45+ Properties</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" onclick="window.location='pages/properties.html?loc=Kandivali'">
+        <div class="area-card"><i class="fas fa-map-marker-alt"></i><h6>Kandivali</h6><p>35+ Properties</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section-pad" style="background:var(--off);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-label">Our Advantages</div>
+      <h2 class="section-title">Why Choose Mumbai Realty</h2>
+      <div class="title-underline mx-auto"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-handshake"></i></div>
+          <h5>Trusted Expert</h5>
+          <p class="text-muted">10+ years of real estate experience in Mumbai's competitive market.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-search-location"></i></div>
+          <h5>Local Knowledge</h5>
+          <p class="text-muted">Deep insights into every neighborhood from Virar to Bandra.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+          <h5>Safe Transactions</h5>
+          <p class="text-muted">Complete legal documentation support for worry-free property deals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT AGENT -->
+<section class="section-pad" id="about">
+  <div class="container">
+    <div class="agent-card">
+      <div class="row align-items-center g-5">
+        <div class="col-md-3 text-center">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Agent" class="agent-photo" />
+          <div class="mt-3">
+            <div class="text-gold fw-bold" style="font-family:'Playfair Display',serif;font-size:1.1rem;">Swapnil Gorule</div>
+            <div style="color:rgba(255,255,255,0.65);font-size:0.85rem;">Senior Real Estate Consultant</div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="section-label">About The Agent</div>
+          <h2 style="color:var(--gold);font-size:2rem;">Your Trusted Mumbai Property Expert</h2>
+          <p>With over a decade of experience navigating Mumbai's dynamic real estate landscape, I specialize in helping families and investors find their ideal properties across Andheri, Borivali, Virar, Bandra, Mira Road, and Kandivali.</p>
+          <p>Whether you're buying your first flat or investing in commercial real estate, I provide end-to-end guidance — from property search to registration — ensuring a smooth and transparent experience.</p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="mailto:swapnilgorule93@gmail.com" class="btn btn-gold px-4 py-2">
+              <i class="fas fa-envelope me-2"></i>Email Me
+            </a>
+            <a id="waBtnAgent" href="#" class="btn btn-outline-light px-4 py-2" target="_blank">
+              <i class="fab fa-whatsapp me-2"></i>WhatsApp
+            </a>
+          </div>
+          <div class="mt-4 d-flex gap-4 flex-wrap">
+            <div><div class="text-gold fw-bold" style="font-size:1.4rem;font-family:'Playfair Display',serif;">500+</div><div style="color:rgba(255,255,255,0.65);font-size:0.85rem;">Properties Sold</div></div>
+            <div><div class="text-gold fw-bold" style="font-size:1.4rem;font-family:'Playfair Display',serif;">10+</div><div style="color:rgba(255,255,255,0.65);font-size:0.85rem;">Years Experience</div></div>
+            <div><div class="text-gold fw-bold" style="font-size:1.4rem;font-family:'Playfair Display',serif;">6</div><div style="color:rgba(255,255,255,0.65);font-size:0.85rem;">Areas Covered</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<div class="cta-section" id="contact">
+  <div class="container">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;">Ready to Find Your Dream Property?</h2>
+    <p style="color:rgba(255,255,255,0.75);font-size:1.1rem;margin-top:10px;">Get in touch today for a free consultation.</p>
+    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+      <a href="mailto:swapnilgorule93@gmail.com" class="btn btn-gold px-5 py-3 fs-6">
+        <i class="fas fa-envelope me-2"></i>swapnilgorule93@gmail.com
+      </a>
+      <a href="pages/properties.html" class="btn btn-outline-light px-5 py-3 fs-6" style="border-radius:8px;">
+        <i class="fas fa-search me-2"></i>Search Properties
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand"><i class="fas fa-building me-2"></i>Mumbai <span>Realty</span></div>
+        <p class="mt-3" style="font-size:0.9rem;">Your trusted partner for buying and selling properties across Mumbai. Expert guidance for every property decision.</p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="mailto:swapnilgorule93@gmail.com" style="color:var(--gold);font-size:1.3rem;"><i class="fas fa-envelope"></i></a>
+          <a id="waFooter" href="#" style="color:#25d366;font-size:1.3rem;" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled mt-3">
+          <li class="mb-2"><a href="index.html"><i class="fas fa-chevron-right me-1" style="color:var(--gold);font-size:0.7rem;"></i>Home</a></li>
+          <li class="mb-2"><a href="pages/properties.html"><i class="fas fa-chevron-right me-1" style="color:var(--gold);font-size:0.7rem;"></i>Properties</a></li>
+          <li class="mb-2"><a href="#about"><i class="fas fa-chevron-right me-1" style="color:var(--gold);font-size:0.7rem;"></i>About</a></li>
+          <li class="mb-2"><a href="pages/login.html"><i class="fas fa-chevron-right me-1" style="color:var(--gold);font-size:0.7rem;"></i>Agent Login</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <h5>Property Types</h5>
+        <ul class="list-unstyled mt-3">
+          <li class="mb-2"><a href="pages/properties.html?type=Flat"><i class="fas fa-home me-2" style="color:var(--gold);"></i>Flats &amp; Apartments</a></li>
+          <li class="mb-2"><a href="pages/properties.html?type=Shop"><i class="fas fa-store me-2" style="color:var(--gold);"></i>Shops</a></li>
+          <li class="mb-2"><a href="pages/properties.html?type=Office"><i class="fas fa-briefcase me-2" style="color:var(--gold);"></i>Offices</a></li>
+          <li class="mb-2"><a href="pages/properties.html?type=Plot"><i class="fas fa-map me-2" style="color:var(--gold);"></i>Plots</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <h5>Service Areas</h5>
+        <div class="mt-3">
+          <a href="pages/properties.html?loc=Andheri" class="area-badge">Andheri</a>
+          <a href="pages/properties.html?loc=Borivali" class="area-badge">Borivali</a>
+          <a href="pages/properties.html?loc=Virar" class="area-badge">Virar</a>
+          <a href="pages/properties.html?loc=Bandra" class="area-badge">Bandra</a>
+          <a href="pages/properties.html?loc=Mira+Road" class="area-badge">Mira Road</a>
+          <a href="pages/properties.html?loc=Kandivali" class="area-badge">Kandivali</a>
+          <a href="pages/properties.html?loc=Dahisar" class="area-badge">Dahisar</a>
+          <a href="pages/properties.html?loc=Malad" class="area-badge">Malad</a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="row">
+      <div class="col-md-6">
+        <p style="font-size:0.85rem;margin:0;">© 2024 Mumbai Realty. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <p style="font-size:0.85rem;margin:0;">
+          <i class="fas fa-map-marker-alt me-1" style="color:var(--gold);"></i> Mumbai, Maharashtra, India
+          &nbsp;|&nbsp;
+          <a href="mailto:swapnilgorule93@gmail.com">swapnilgorule93@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Config & Main -->
+<script src="js/firebase-config.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    initWhatsApp();
+    document.getElementById('waBtnAgent').href = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20I%20am%20interested%20in%20a%20property`;
+    document.getElementById('waFooter').href = `https://wa.me/${WHATSAPP_NUMBER}?text=Hello%20I%20am%20interested%20in%20a%20property`;
+    loadFeatured();
+    setTimeout(hideLoader, 800);
+  });
+
+  // Search redirect
+  document.getElementById('searchForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const loc    = document.getElementById('searchLoc').value;
+    const budget = document.getElementById('searchBudget').value;
+    const type   = document.getElementById('searchType').value;
+    let url = 'pages/properties.html?';
+    if (loc)    url += `loc=${encodeURIComponent(loc)}&`;
+    if (budget) url += `budget=${budget}&`;
+    if (type)   url += `type=${encodeURIComponent(type)}&`;
+    window.location.href = url;
+  });
+
+  // Load featured properties (latest 6)
+  async function loadFeatured() {
+    const grid = document.getElementById('featuredGrid');
+    try {
+      const snap = await db.collection('properties').orderBy('createdAt','desc').limit(6).get();
+      if (snap.empty) {
+        grid.innerHTML = `<div class="col-12 empty-state"><i class="fas fa-home"></i><h5>No properties yet</h5><p>Properties will appear here once added by the agent.</p></div>`;
+        return;
+      }
+      grid.innerHTML = snap.docs.map(buildPropertyCard).join('');
+    } catch(err) {
+      console.error(err);
+      grid.innerHTML = `<div class="col-12 empty-state"><i class="fas fa-exclamation-circle"></i><h5>Could not load properties</h5><p>Please check Firebase configuration.</p></div>`;
+    }
+  }
+</script>
+</body>
+</html>
