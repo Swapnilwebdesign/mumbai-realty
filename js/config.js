@@ -1,6 +1,3 @@
-// ============================================================
-// FIREBASE CONFIG
-// ============================================================
 const firebaseConfig = {
   apiKey: "AIzaSyAfbx0WlUPJ0elur2l09GXZfi0j2jVoGuM",
   authDomain: "mumbai-realty.firebaseapp.com",
@@ -9,15 +6,9 @@ const firebaseConfig = {
   messagingSenderId: "806144133947",
   appId: "1:806144133947:web:541f7a32084f815da7c51e"
 };
-
-const AGENT_EMAIL    = "swapnilgorule93@gmail.com";
-const WA_NUMBER      = "917219755895";
-const EMAILJS_SVC    = "service_8oiphmg";
-const EMAILJS_TPL    = "template_6vzfflj";
-const EMAILJS_KEY    = "XAUsHXibyZw-0F2GE";
-
+const AGENT_EMAIL = "swapnilgorule93@gmail.com";
+const WA_NUMBER = "917219755895";
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-
-const db      = firebase.firestore();
-const auth    = firebase.auth();
+const db = firebase.firestore();
+const auth = firebase.auth();
 const storage = firebase.storage();
