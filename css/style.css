@@ -632,7 +632,7 @@ body {
   border: none; background: none; width: 100%;
   text-align: left;
 }
-.sidebar-item i { width: 18px; text-align: center; }
+.sidebar-item i { width: 18px; text-align: center; color:#000;}
 .sidebar-item:hover, .sidebar-item.active {
   color: var(--white);
   background: rgba(255,255,255,0.06);
