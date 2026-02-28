@@ -6,8 +6,8 @@ const firebaseConfig = {
   messagingSenderId: "806144133947",
   appId: "1:806144133947:web:541f7a32084f815da7c51e"
 };
-const AGENT_EMAIL = "swapnilgorule93@gmail.com";
-const WA_NUMBER = "917219755895";
+const AGENT_EMAIL ="craftnixdigital@gmail.com";
+const WA_NUMBER = "918767180524";
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const auth = firebase.auth();
