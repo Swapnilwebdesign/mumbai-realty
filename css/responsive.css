@@ -1,0 +1,153 @@
+/* ============================================================
+   MUMBAI REALTY — Responsive Styles
+   Add this file to all pages:
+   <link rel="stylesheet" href="css/responsive.css"/>
+   ============================================================ */
+
+/* ── Tablet (max 991px) ── */
+@media (max-width: 991px) {
+  /* Sidebar */
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed; z-index: 200;
+    transition: transform 0.3s ease;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0 !important; }
+
+  /* Hero */
+  .hero-title { font-size: 3.5rem; }
+  .hero-actions { flex-direction: column; gap: 12px; }
+  .hero-actions a { text-align: center; justify-content: center; }
+
+  /* About */
+  .about-badge { right: 0; bottom: -10px; }
+  .about-img-wrap { margin-bottom: 40px; }
+
+  /* Search */
+  .search-section { margin-top: -20px; }
+
+  /* Dashboard */
+  .dash-section { padding: 20px; }
+  .top-bar { padding: 14px 20px; }
+  .kpi-num { font-size: 1.6rem; }
+
+  /* Filter bar */
+  .filter-bar { top: 60px; }
+  .filter-select { font-size: 0.82rem; padding: 8px 10px; }
+}
+
+/* ── Mobile (max 767px) ── */
+@media (max-width: 767px) {
+  /* Navbar */
+  .site-nav { padding: 14px 0; }
+  .nav-brand { font-size: 1.3rem; }
+
+  /* Hero */
+  .hero { min-height: 90vh; }
+  .hero-title { font-size: 2.6rem; line-height: 1.15; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-content { padding-top: 70px; padding-bottom: 40px; }
+  .hero-scroll { display: none; }
+
+  /* Search Card */
+  .search-section { margin-top: 0; padding: 16px 0 32px; }
+  .search-card { padding: 20px 16px; border-radius: 10px; }
+  .btn-search-submit { padding: 11px 16px; font-size: 0.88rem; }
+
+  /* Sections */
+  .section-title { font-size: 1.8rem; }
+  .section-pad { padding: 52px 0; }
+
+  /* Property Cards */
+  .prop-card-img-wrap { height: 190px; }
+  .prop-body { padding: 16px; }
+  .prop-price { font-size: 1.3rem; }
+  .prop-meta { gap: 10px; font-size: 0.78rem; }
+
+  /* Stats */
+  .stats-section { padding: 40px 0; }
+  .stat-num { font-size: 2rem; }
+  .stat-label { font-size: 0.8rem; }
+
+  /* About */
+  .about-img { max-height: 300px; object-fit: cover; }
+  .about-badge { font-size: 0.78rem; padding: 8px 14px; }
+  .about-text { font-size: 0.92rem; }
+
+  /* Areas */
+  .areas-section { padding: 52px 0; }
+  .area-card { padding: 18px 14px; font-size: 1.1rem; }
+
+  /* Contact */
+  .contact-section { padding: 60px 0; }
+  .contact-section .btn-primary-custom,
+  .contact-section .btn-ghost { width: 100%; justify-content: center; }
+
+  /* Footer */
+  .site-footer { padding: 48px 0 0; }
+  .footer-brand { font-size: 1.5rem; }
+
+  /* Login */
+  .login-page { padding: 16px; align-items: flex-start; padding-top: 48px; }
+  .login-card { padding: 28px 20px; border-radius: 16px; }
+  .login-logo { font-size: 1.7rem; }
+
+  /* Dashboard */
+  .top-bar { padding: 12px 16px; }
+  .top-bar-title { font-size: 0.95rem; }
+  .dash-section { padding: 16px 12px; }
+  .kpi-card { padding: 14px; }
+  .kpi-num { font-size: 1.4rem; }
+  .kpi-label { font-size: 0.75rem; }
+  .kpi-icon { width: 38px; height: 38px; font-size: 1rem; margin-bottom: 10px; }
+  .dash-card-header { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+  .dash-table th, .dash-table td { padding: 10px 12px; font-size: 0.8rem; }
+
+  /* Form */
+  .form-section { padding: 20px 16px; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea { font-size: 0.88rem; padding: 10px 14px; }
+  .btn-save { padding: 11px 24px; font-size: 0.9rem; }
+
+  /* Properties page */
+  .page-hero { padding: 100px 0 40px; }
+  .page-hero-title { font-size: 2.2rem; }
+  .filter-bar { padding: 12px 0; top: 58px; }
+  .filter-bar .d-flex { overflow-x: auto; flex-wrap: nowrap !important; padding-bottom: 4px; }
+  .filter-select { min-width: 130px; flex-shrink: 0; }
+
+  /* Property Detail */
+  .detail-hero { height: 260px; border-radius: 10px; }
+  .detail-price { font-size: 1.8rem; }
+  .detail-meta { gap: 16px; }
+  .contact-sticky { position: static; margin-top: 24px; }
+
+  /* Buttons */
+  .hero-actions .btn-primary-custom,
+  .hero-actions .btn-ghost { font-size: 0.9rem; padding: 12px 20px; }
+
+  /* WhatsApp */
+  .wa-float { bottom: 20px; right: 16px; width: 50px; height: 50px; font-size: 1.3rem; }
+
+  /* Toast */
+  .toast-wrap { width: 90%; left: 5%; transform: none; }
+  .toast-msg { font-size: 0.85rem; padding: 12px 16px; }
+
+  /* Sidebar */
+  .sidebar { width: 80vw; max-width: 280px; }
+  .sidebar-brand { font-size: 1.4rem; }
+  .sidebar-item { padding: 12px 20px; font-size: 0.88rem; }
+}
+
+/* ── Small Mobile (max 400px) ── */
+@media (max-width: 400px) {
+  .hero-title { font-size: 2.1rem; }
+  .section-title { font-size: 1.6rem; }
+  .login-card { padding: 24px 16px; }
+  .kpi-num { font-size: 1.2rem; }
+  .prop-card-img-wrap { height: 170px; }
+  .area-card { padding: 14px 10px; font-size: 1rem; }
+}
